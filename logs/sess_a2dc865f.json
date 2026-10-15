@@ -1,0 +1,82 @@
+{
+  "session_id": "sess_a2dc865f",
+  "table_number": 4,
+  "party_size": 1,
+  "model": "qwen2.5",
+  "started_at": "2026-10-14T15:09:01",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Umm can you give me menu for?",
+      "at": "2026-10-14T15:09:17"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 1",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 4 is all set, for one. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Umm can you give me menu for?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Italian"
+          },
+          "result": {
+            "success": true,
+            "category": "Italian",
+            "items": [
+              {
+                "name": "Bruschetta",
+                "price": 160.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Lasagna",
+                "price": 290.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Margherita Pizza",
+                "price": 320.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Risotto ai Funghi",
+                "price": 270.0,
+                "stock_qty": 15
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Here is our Italian menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 0.0,
+    "items_purchased": []
+  },
+  "receipt": null
+}

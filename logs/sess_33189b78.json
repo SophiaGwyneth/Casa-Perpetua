@@ -1,0 +1,155 @@
+{
+  "session_id": "sess_33189b78",
+  "table_number": 4,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-10T21:19:16",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Pastries menu",
+      "at": "2026-10-10T21:19:29"
+    },
+    {
+      "from": "ORDERING",
+      "to": "REVIEW",
+      "trigger": "ui: Review order",
+      "at": "2026-10-10T21:21:28"
+    },
+    {
+      "from": "REVIEW",
+      "to": "CONFIRMED",
+      "trigger": "ui: Confirm order",
+      "at": "2026-10-10T21:21:30"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! I've set up Table 4 for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Pastries menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Pastries"
+          },
+          "result": {
+            "success": true,
+            "category": "Pastries",
+            "items": [
+              {
+                "name": "Butter Croissant",
+                "price": 85.0,
+                "stock_qty": 30
+              },
+              {
+                "name": "Cheese Danish",
+                "price": 120.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Ensaymada",
+                "price": 90.0,
+                "stock_qty": 23
+              },
+              {
+                "name": "Pain au Chocolat",
+                "price": 110.0,
+                "stock_qty": 20
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Here are our pastries: we have Butter Croissant for 85 PHP, Cheese Danish for 120 PHP, Ensaymada for 90 PHP, and Pain au Chocolat for 110 PHP. Which one would you like?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 3,
+      "source": "ui",
+      "user_transcript": "[button] Review order",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Please check your order and confirm when you are ready.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Pain au Chocolat",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 121.0
+      }
+    },
+    {
+      "turn": 4,
+      "source": "ui",
+      "user_transcript": "[button] Confirm order",
+      "fsm_state": "CONFIRMED",
+      "tool_calls": [],
+      "agent_response": "Your order is on its way to the kitchen. Receipt CP-189B78.",
+      "db_state": {
+        "table_sessions.status": "CONFIRMED",
+        "order_line_items": [
+          {
+            "item": "Pain au Chocolat",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 121.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "CONFIRMED",
+    "grand_total_php": 121.0,
+    "items_purchased": [
+      "Pain au Chocolat"
+    ]
+  },
+  "receipt": {
+    "receipt_no": "CP-189B78",
+    "issued_at": "2026-10-10 21:21",
+    "table_no": 4,
+    "items": [
+      {
+        "line_id": 21,
+        "item_id": 7,
+        "name": "Pain au Chocolat",
+        "image_url": null,
+        "category": "Pastries",
+        "allergens": "gluten,dairy,egg",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 110.0,
+        "line_total": 110.0
+      }
+    ],
+    "subtotal": 110.0,
+    "service_fee": 11.0,
+    "grand_total": 121.0
+  }
+}

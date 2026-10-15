@@ -1,0 +1,82 @@
+{
+  "session_id": "sess_e0efa65c",
+  "table_number": 4,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-10T18:32:39",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Can you give me the menu?",
+      "at": "2026-10-10T18:33:06"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! I've set up Table 4 for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Can you give me the menu?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Pasta"
+          },
+          "result": {
+            "success": true,
+            "category": "Pasta",
+            "items": [
+              {
+                "name": "Aglio e Olio",
+                "price": 200.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Carbonara",
+                "price": 240.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Creamy Pesto Penne",
+                "price": 230.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Spaghetti Bolognese",
+                "price": 220.0,
+                "stock_qty": 25
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Sure, here are our Pasta options:\n\n1. Spaghetti Bolognese - PHP 220\n2. Aglio e Olio - PHP 200\n3. Carbonara - PHP 240\n4. Creamy Pesto Penne - PHP 230\n\nWould you like to try any of these?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 0.0,
+    "items_purchased": []
+  },
+  "receipt": null
+}

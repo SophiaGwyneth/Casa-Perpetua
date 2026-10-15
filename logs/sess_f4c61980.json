@@ -1,0 +1,248 @@
+{
+  "session_id": "sess_f4c61980",
+  "table_number": 8,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-15T21:37:14",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Can I have two cheeseburgers?",
+      "at": "2026-10-15T21:37:27"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 8 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Can I have two cheeseburgers?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Cheeseburger",
+            "qty": 2
+          },
+          "result": {
+            "success": true,
+            "message": "Added 2x Cheeseburger to the cart.",
+            "item": {
+              "id": 29,
+              "name": "Cheeseburger",
+              "category": "Burgers",
+              "price": 180.0,
+              "stock_qty": 29,
+              "allergens": "gluten,dairy,egg",
+              "image_url": "/menu-img/Cheeseburger.png",
+              "subcategory": "",
+              "temp_options": ""
+            }
+          }
+        }
+      ],
+      "agent_response": "Added 2 Cheeseburger to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 396.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Can I have shaolong Bao?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Xiao Long Bao",
+            "qty": 1
+          },
+          "result": {
+            "success": true,
+            "message": "Added 1x Xiao Long Bao to the cart.",
+            "item": {
+              "id": 66,
+              "name": "Xiao Long Bao",
+              "category": "Chinese",
+              "price": 220.0,
+              "stock_qty": 18,
+              "allergens": "gluten,soy",
+              "image_url": "/menu-img/Xiao%20Long%20Bao.png",
+              "subcategory": "",
+              "temp_options": ""
+            }
+          }
+        }
+      ],
+      "agent_response": "Added 1 Xiao Long Bao to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": ""
+          },
+          {
+            "item": "Xiao Long Bao",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 638.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "can i have the menu for chicken",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Chicken"
+          },
+          "result": {
+            "success": true,
+            "category": "Chicken",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Buffalo Wings",
+                "price": 230.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Chicken Inasal",
+                "price": 190.0,
+                "stock_qty": 23
+              },
+              {
+                "name": "Crispy Fried Chicken",
+                "price": 210.0,
+                "stock_qty": 25
+              },
+              {
+                "name": "Honey Garlic Chicken",
+                "price": 220.0,
+                "stock_qty": 20
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Here is our Chicken menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": ""
+          },
+          {
+            "item": "Xiao Long Bao",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 638.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 5,
+      "source": "chat",
+      "user_transcript": "Can I have one honey garlic chicken with extra cheese?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Honey Garlic Chicken",
+            "qty": 1,
+            "instructions": "extra cheese"
+          },
+          "result": {
+            "success": true,
+            "message": "Added 1x Honey Garlic Chicken to the cart.",
+            "item": {
+              "id": 36,
+              "name": "Honey Garlic Chicken",
+              "category": "Chicken",
+              "price": 220.0,
+              "stock_qty": 20,
+              "allergens": "soy",
+              "image_url": "/menu-img/Honey%20Garlic%20Chicken.png",
+              "subcategory": "",
+              "temp_options": ""
+            }
+          },
+          "guardrail": true
+        }
+      ],
+      "agent_response": "Added 1 Honey Garlic Chicken to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": ""
+          },
+          {
+            "item": "Xiao Long Bao",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Honey Garlic Chicken",
+            "qty": 1,
+            "notes": "extra cheese"
+          }
+        ],
+        "grand_total_php": 880.0,
+        "payment_method": null
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 880.0,
+    "payment_method": null,
+    "items_purchased": [
+      "Cheeseburger",
+      "Xiao Long Bao",
+      "Honey Garlic Chicken"
+    ]
+  },
+  "receipt": null
+}

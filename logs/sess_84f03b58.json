@@ -1,0 +1,821 @@
+{
+  "session_id": "sess_84f03b58",
+  "table_number": 7,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-15T20:57:43",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Dairy menu",
+      "at": "2026-10-15T20:57:47"
+    },
+    {
+      "from": "ORDERING",
+      "to": "REVIEW",
+      "trigger": "ui: Review order",
+      "at": "2026-10-15T20:58:21"
+    },
+    {
+      "from": "REVIEW",
+      "to": "CONFIRMED",
+      "trigger": "ui: Confirm order",
+      "at": "2026-10-15T20:58:57"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 7 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Dairy menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Dairy"
+          },
+          "result": {
+            "success": true,
+            "category": "Dairy",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Cheese Platter",
+                "price": 280.0,
+                "stock_qty": 10
+              },
+              {
+                "name": "Yogurt Parfait",
+                "price": 120.0,
+                "stock_qty": 18
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Dairy menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Show me the Burgers menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Burgers"
+          },
+          "result": {
+            "success": true,
+            "category": "Burgers",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Bacon Burger",
+                "price": 220.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Cheeseburger",
+                "price": 180.0,
+                "stock_qty": 29
+              },
+              {
+                "name": "Mushroom Swiss Burger",
+                "price": 210.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Veggie Burger",
+                "price": 190.0,
+                "stock_qty": 17
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Burgers menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 132.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "Show me the Filipino menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Filipino"
+          },
+          "result": {
+            "success": true,
+            "category": "Filipino",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Chicken Adobo",
+                "price": 190.0,
+                "stock_qty": 28
+              },
+              {
+                "name": "Kare-Kare",
+                "price": 280.0,
+                "stock_qty": 14
+              },
+              {
+                "name": "Pork Sisig",
+                "price": 240.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Sinigang na Baboy",
+                "price": 220.0,
+                "stock_qty": 22
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Filipino menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Cheeseburger",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 330.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 5,
+      "source": "chat",
+      "user_transcript": "Show me the Korean menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Korean"
+          },
+          "result": {
+            "success": true,
+            "category": "Korean",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Beef Bulgogi",
+                "price": 290.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Bibimbap",
+                "price": 250.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Fried Egg",
+                "price": 30.0,
+                "stock_qty": 50
+              },
+              {
+                "name": "Kimchi",
+                "price": 60.0,
+                "stock_qty": 40
+              },
+              {
+                "name": "Kimchi Fried Rice",
+                "price": 220.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Kimchi Jjigae",
+                "price": 230.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Korean BBQ",
+                "price": 280.0,
+                "stock_qty": 14
+              },
+              {
+                "name": "Korean Fried Chicken",
+                "price": 260.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Korean Ramen",
+                "price": 200.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Steamed Rice",
+                "price": 40.0,
+                "stock_qty": 60
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Korean menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 396.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 6,
+      "source": "chat",
+      "user_transcript": "Show me the Thai menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Thai"
+          },
+          "result": {
+            "success": true,
+            "category": "Thai",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Authentic Pad Thai",
+                "price": 260.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Green Curry",
+                "price": 240.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Mango Sticky Rice",
+                "price": 160.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Tom Yum Soup",
+                "price": 230.0,
+                "stock_qty": 16
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Thai menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 913.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 7,
+      "source": "chat",
+      "user_transcript": "Show me the Chicken menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Chicken"
+          },
+          "result": {
+            "success": true,
+            "category": "Chicken",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Buffalo Wings",
+                "price": 230.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Chicken Inasal",
+                "price": 190.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Crispy Fried Chicken",
+                "price": 210.0,
+                "stock_qty": 25
+              },
+              {
+                "name": "Honey Garlic Chicken",
+                "price": 220.0,
+                "stock_qty": 20
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Chicken menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Green Curry",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 1177.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 8,
+      "source": "ui",
+      "user_transcript": "[button] Review order",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Please check your order and confirm when you are ready.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 9,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: Credit/Debit Card",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by Credit/Debit Card. Your waiter will bring the card terminal to your table.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Credit/Debit Card"
+      }
+    },
+    {
+      "turn": 10,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: Maya",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by Maya. Scan the Maya QR at the counter when you are done.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Maya"
+      }
+    },
+    {
+      "turn": 11,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: GCash",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by GCash. Scan the GCash QR at the counter when you are done.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "GCash"
+      }
+    },
+    {
+      "turn": 12,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: Maya",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by Maya. Scan the Maya QR at the counter when you are done.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Maya"
+      }
+    },
+    {
+      "turn": 13,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: Credit/Debit Card",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by Credit/Debit Card. Your waiter will bring the card terminal to your table.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Credit/Debit Card"
+      }
+    },
+    {
+      "turn": 14,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: Cash",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by Cash. Please pay your waiter or the counter when you are done.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Cash"
+      }
+    },
+    {
+      "turn": 15,
+      "source": "ui",
+      "user_transcript": "[button] Mode of payment: Credit/Debit Card",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Got it, you'll pay by Credit/Debit Card. Your waiter will bring the card terminal to your table.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Credit/Debit Card"
+      }
+    },
+    {
+      "turn": 16,
+      "source": "ui",
+      "user_transcript": "[button] Confirm order",
+      "fsm_state": "CONFIRMED",
+      "tool_calls": [],
+      "agent_response": "Your order is on its way to the kitchen. Receipt CP-F03B58.",
+      "db_state": {
+        "table_sessions.status": "CONFIRMED",
+        "order_line_items": [
+          {
+            "item": "Yogurt Parfait",
+            "qty": 3,
+            "notes": ""
+          },
+          {
+            "item": "Bibimbap",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Chicken Inasal",
+            "qty": 1,
+            "notes": "make it extra spicy"
+          }
+        ],
+        "grand_total_php": 1122.0,
+        "payment_method": "Credit/Debit Card"
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "CONFIRMED",
+    "grand_total_php": 1122.0,
+    "payment_method": "Credit/Debit Card",
+    "items_purchased": [
+      "Yogurt Parfait",
+      "Bibimbap",
+      "Kimchi Fried Rice",
+      "Chicken Inasal"
+    ]
+  },
+  "receipt": {
+    "receipt_no": "CP-F03B58",
+    "issued_at": "2026-10-15 20:58",
+    "table_no": 7,
+    "items": [
+      {
+        "line_id": 7,
+        "item_id": 23,
+        "name": "Yogurt Parfait",
+        "image_url": "/menu-img/Yogurt%20Parfait.png",
+        "category": "Dairy",
+        "allergens": "dairy,tree nut",
+        "quantity": 3,
+        "special_instructions": "",
+        "size": "",
+        "base_price": 120.0,
+        "price": 120.0,
+        "line_total": 360.0,
+        "display_name": "Yogurt Parfait"
+      },
+      {
+        "line_id": 10,
+        "item_id": 49,
+        "name": "Bibimbap",
+        "image_url": "/menu-img/Bibimbap.png",
+        "category": "Korean",
+        "allergens": "egg,soy,sesame",
+        "quantity": 1,
+        "special_instructions": "",
+        "size": "",
+        "base_price": 250.0,
+        "price": 250.0,
+        "line_total": 250.0,
+        "display_name": "Bibimbap"
+      },
+      {
+        "line_id": 11,
+        "item_id": 68,
+        "name": "Kimchi Fried Rice",
+        "image_url": "/menu-img/Kimchi%20Fried%20Rice.png",
+        "category": "Korean",
+        "allergens": "egg,soy,sesame,fish",
+        "quantity": 1,
+        "special_instructions": "",
+        "size": "",
+        "base_price": 220.0,
+        "price": 220.0,
+        "line_total": 220.0,
+        "display_name": "Kimchi Fried Rice"
+      },
+      {
+        "line_id": 13,
+        "item_id": 35,
+        "name": "Chicken Inasal",
+        "image_url": "/menu-img/Chicken%20Inasal.png",
+        "category": "Chicken",
+        "allergens": "",
+        "quantity": 1,
+        "special_instructions": "make it extra spicy",
+        "size": "",
+        "base_price": 190.0,
+        "price": 190.0,
+        "line_total": 190.0,
+        "display_name": "Chicken Inasal"
+      }
+    ],
+    "subtotal": 1020.0,
+    "service_fee": 102.0,
+    "grand_total": 1122.0,
+    "payment_method": "Credit/Debit Card",
+    "payment_note": "Your waiter will bring the card terminal to your table."
+  }
+}

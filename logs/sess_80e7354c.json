@@ -1,0 +1,216 @@
+{
+  "session_id": "sess_80e7354c",
+  "table_number": 16,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-15T21:43:21",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Desserts menu",
+      "at": "2026-10-15T21:43:26"
+    },
+    {
+      "from": "ORDERING",
+      "to": "REVIEW",
+      "trigger": "ui: Review order",
+      "at": "2026-10-15T21:44:50"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 16 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Desserts menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Desserts"
+          },
+          "result": {
+            "success": true,
+            "category": "Desserts",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Chocolate Lava Cake",
+                "price": 190.0,
+                "stock_qty": 12
+              },
+              {
+                "name": "Halo-Halo",
+                "price": 140.0,
+                "stock_qty": 25
+              },
+              {
+                "name": "Leche Flan",
+                "price": 120.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Tiramisu",
+                "price": 180.0,
+                "stock_qty": 14
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Desserts menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "add 2 cheeseburgers without onions",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Cheeseburger",
+            "instructions": "without onions",
+            "qty": 2
+          },
+          "result": {
+            "success": true,
+            "message": "Added 2x Cheeseburger to the cart.",
+            "item": {
+              "id": 29,
+              "name": "Cheeseburger",
+              "category": "Burgers",
+              "price": 180.0,
+              "stock_qty": 29,
+              "allergens": "gluten,dairy,egg",
+              "image_url": "/menu-img/Cheeseburger.png",
+              "subcategory": "",
+              "temp_options": ""
+            }
+          }
+        }
+      ],
+      "agent_response": "Added 2 Cheeseburger to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": "without onions"
+          }
+        ],
+        "grand_total_php": 396.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "Can I have honey garlic chicken?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Honey Garlic Chicken",
+            "qty": 1,
+            "instructions": ""
+          },
+          "result": {
+            "success": true,
+            "message": "Added 1x Honey Garlic Chicken to the cart.",
+            "item": {
+              "id": 36,
+              "name": "Honey Garlic Chicken",
+              "category": "Chicken",
+              "price": 220.0,
+              "stock_qty": 20,
+              "allergens": "soy",
+              "image_url": "/menu-img/Honey%20Garlic%20Chicken.png",
+              "subcategory": "",
+              "temp_options": ""
+            }
+          },
+          "guardrail": true
+        }
+      ],
+      "agent_response": "Added 1 Honey Garlic Chicken to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": "without onions"
+          },
+          {
+            "item": "Honey Garlic Chicken",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 638.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 5,
+      "source": "ui",
+      "user_transcript": "[button] Review order",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Please check your order and confirm when you are ready.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Cheeseburger",
+            "qty": 2,
+            "notes": "without onions"
+          },
+          {
+            "item": "Honey Garlic Chicken",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 638.0,
+        "payment_method": null
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "REVIEW",
+    "grand_total_php": 638.0,
+    "payment_method": null,
+    "items_purchased": [
+      "Cheeseburger",
+      "Honey Garlic Chicken"
+    ]
+  },
+  "receipt": null
+}

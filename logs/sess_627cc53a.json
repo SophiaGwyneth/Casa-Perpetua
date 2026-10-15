@@ -1,0 +1,29 @@
+{
+  "session_id": "sess_627cc53a",
+  "table_number": 4,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-10T19:33:15",
+  "fsm_state_transitions": [],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! I've set up Table 4 for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "GREETING",
+    "grand_total_php": 0.0,
+    "items_purchased": []
+  },
+  "receipt": null
+}

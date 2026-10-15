@@ -1,0 +1,95 @@
+{
+  "session_id": "sess_c75a1e2b",
+  "table_number": 15,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-15T15:31:04",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Pastries menu",
+      "at": "2026-10-15T15:53:46"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 15 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Pastries menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Pastries"
+          },
+          "result": {
+            "success": true,
+            "category": "Pastries",
+            "subcategory": "",
+            "subcategories": [],
+            "items": [
+              {
+                "name": "Almond Danish",
+                "price": 120.0,
+                "stock_qty": 12
+              },
+              {
+                "name": "Butter Croissant",
+                "price": 85.0,
+                "stock_qty": 30
+              },
+              {
+                "name": "Cheese Danish",
+                "price": 120.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Ensaymada",
+                "price": 90.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Pain au Chocolat",
+                "price": 110.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Pretzel",
+                "price": 95.0,
+                "stock_qty": 20
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Pastries menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 0.0,
+    "items_purchased": []
+  },
+  "receipt": null
+}

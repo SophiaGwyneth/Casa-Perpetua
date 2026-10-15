@@ -1,0 +1,277 @@
+{
+  "session_id": "sess_a7ee13e3",
+  "table_number": 1,
+  "model": "qwen2.5",
+  "started_at": "2026-10-10T18:05:02",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Welcome to Perpetual Bistro. Would you like to see our menu categories or start with something specific?",
+      "at": "2026-10-10T18:08:08"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "chat",
+      "user_transcript": "Hello.",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Hello! Welcome to Perpetual Bistro. Would you like to explore our menu categories or find something specific?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Hello.",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Hello! Welcome to Perpetual Bistro. Let's explore our menu together. What category are you interested in, or do you have something specific in mind?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Hello.",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Hello! Welcome to Perpetual Bistro. Would you like to see our menu categories or start with something specific?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "Welcome to perpetual Bistro.",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Perpetual Bistro! Would you like to explore our menu categories or start with something specific?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 5,
+      "source": "chat",
+      "user_transcript": "Welcome to perpetual Bistro.",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Perpetual Bistro! Let's start exploring our menu. Would you like to see our categories or try something specific?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 6,
+      "source": "chat",
+      "user_transcript": "Welcome to perpetual Bistro.",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Perpetual Bistro! Would you like to see our menu categories or start with something specific?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 7,
+      "source": "chat",
+      "user_transcript": "Welcome to Perpetual Bistro. Would you like to see our menu categories or start with something specific?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [],
+      "agent_response": "Sure thing! Shall we check out our menu categories or dive straight into some dishes?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 8,
+      "source": "chat",
+      "user_transcript": "Sure thing.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [],
+      "agent_response": "Great! Would you like to see our menu categories or start with something specific?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 9,
+      "source": "chat",
+      "user_transcript": "Great.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [],
+      "agent_response": "Let's get started! Would you like to see our menu categories or pick something specific from the menu?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 10,
+      "source": "chat",
+      "user_transcript": "Let's get started.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Pasta"
+          },
+          "result": {
+            "success": true,
+            "category": "Pasta",
+            "items": [
+              {
+                "name": "Aglio e Olio",
+                "price": 200.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Carbonara",
+                "price": 240.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Creamy Pesto Penne",
+                "price": 230.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Spaghetti Bolognese",
+                "price": 220.0,
+                "stock_qty": 25
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Great! Here are some pasta options we have:\n\n1. Spaghetti Bolognese - PHP 220\n2. Aglio e Olio - PHP 200\n3. Carbonara - PHP 240\n4. Creamy Pesto Penne - PHP 230\n\nWould you like to try any of these, or is there a specific dish you're interested in?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 11,
+      "source": "chat",
+      "user_transcript": "Great, here are some pasta options we have.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Pasta"
+          },
+          "result": {
+            "success": true,
+            "category": "Pasta",
+            "items": [
+              {
+                "name": "Aglio e Olio",
+                "price": 200.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Carbonara",
+                "price": 240.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Creamy Pesto Penne",
+                "price": 230.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Spaghetti Bolognese",
+                "price": 220.0,
+                "stock_qty": 25
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Here are some pasta options we have:\n\n1. Spaghetti Bolognese - PHP 220\n2. Aglio e Olio - PHP 200\n3. Carbonara - PHP 240\n4. Creamy Pesto Penne - PHP 230\n\nWould you like to try any of these, or is there a specific dish you're interested in?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 12,
+      "source": "chat",
+      "user_transcript": "Here are some pasta options we have.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Pasta"
+          },
+          "result": {
+            "success": true,
+            "category": "Pasta",
+            "items": [
+              {
+                "name": "Aglio e Olio",
+                "price": 200.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Carbonara",
+                "price": 240.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Creamy Pesto Penne",
+                "price": 230.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Spaghetti Bolognese",
+                "price": 220.0,
+                "stock_qty": 25
+              }
+            ]
+          }
+        }
+      ],
+      "agent_response": "Here are some pasta options we have:\n\n1. Spaghetti Bolognese - PHP 220\n2. Aglio e Olio - PHP 200\n3. Carbonara - PHP 240\n4. Creamy Pesto Penne - PHP 230\n\nWould you like to try any of these, or is there a specific dish you're interested in?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 0.0,
+    "items_purchased": []
+  },
+  "receipt": null
+}

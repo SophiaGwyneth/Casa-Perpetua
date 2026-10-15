@@ -1,0 +1,259 @@
+{
+  "session_id": "sess_54dd533d",
+  "table_number": 10,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-14T22:07:10",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Korean menu",
+      "at": "2026-10-14T22:07:13"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 10 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Korean menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Korean"
+          },
+          "result": {
+            "success": true,
+            "category": "Korean",
+            "items": [
+              {
+                "name": "Beef Bulgogi",
+                "price": 290.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Bibimbap",
+                "price": 250.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Fried Egg",
+                "price": 30.0,
+                "stock_qty": 50
+              },
+              {
+                "name": "Kimchi",
+                "price": 60.0,
+                "stock_qty": 40
+              },
+              {
+                "name": "Kimchi Fried Rice",
+                "price": 220.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Kimchi Jjigae",
+                "price": 230.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Korean BBQ",
+                "price": 280.0,
+                "stock_qty": 14
+              },
+              {
+                "name": "Korean Fried Chicken",
+                "price": 260.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Korean Ramen",
+                "price": 200.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Steamed Rice",
+                "price": 40.0,
+                "stock_qty": 60
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Korean menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Show me the Italian menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Italian"
+          },
+          "result": {
+            "success": true,
+            "category": "Italian",
+            "items": [
+              {
+                "name": "Bruschetta",
+                "price": 160.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Lasagna",
+                "price": 290.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Lasagna al Forno",
+                "price": 290.0,
+                "stock_qty": 12
+              },
+              {
+                "name": "Margherita Pizza",
+                "price": 320.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Risotto ai Funghi",
+                "price": 270.0,
+                "stock_qty": 15
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Italian menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "Show me the Chicken menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Chicken"
+          },
+          "result": {
+            "success": true,
+            "category": "Chicken",
+            "items": [
+              {
+                "name": "Buffalo Wings",
+                "price": 230.0,
+                "stock_qty": 22
+              },
+              {
+                "name": "Chicken Inasal",
+                "price": 190.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Crispy Fried Chicken",
+                "price": 210.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Honey Garlic Chicken",
+                "price": 220.0,
+                "stock_qty": 19
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Chicken menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 5,
+      "source": "chat",
+      "user_transcript": "Show me the Filipino menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Filipino"
+          },
+          "result": {
+            "success": true,
+            "category": "Filipino",
+            "items": [
+              {
+                "name": "Chicken Adobo",
+                "price": 190.0,
+                "stock_qty": 28
+              },
+              {
+                "name": "Kare-Kare",
+                "price": 280.0,
+                "stock_qty": 14
+              },
+              {
+                "name": "Pork Sisig",
+                "price": 240.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Sinigang na Baboy",
+                "price": 220.0,
+                "stock_qty": 21
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Filipino menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 0.0,
+    "items_purchased": []
+  },
+  "receipt": null
+}

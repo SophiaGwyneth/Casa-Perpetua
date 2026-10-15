@@ -1,0 +1,156 @@
+{
+  "session_id": "sess_b407f127",
+  "table_number": 4,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-14T14:47:41",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Snacks menu",
+      "at": "2026-10-14T14:47:45"
+    },
+    {
+      "from": "ORDERING",
+      "to": "REVIEW",
+      "trigger": "ui: Review order",
+      "at": "2026-10-14T14:47:48"
+    },
+    {
+      "from": "REVIEW",
+      "to": "CONFIRMED",
+      "trigger": "ui: Confirm order",
+      "at": "2026-10-14T14:49:13"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 4 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Snacks menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Snacks"
+          },
+          "result": {
+            "success": true,
+            "category": "Snacks",
+            "items": [
+              {
+                "name": "Calamari Fritti",
+                "price": 210.0,
+                "stock_qty": 15
+              },
+              {
+                "name": "Nachos Supreme",
+                "price": 190.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Onion Rings",
+                "price": 130.0,
+                "stock_qty": 26
+              },
+              {
+                "name": "Truffle Fries",
+                "price": 150.0,
+                "stock_qty": 29
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Snacks menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 3,
+      "source": "ui",
+      "user_transcript": "[button] Review order",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Please check your order and confirm when you are ready.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Nachos Supreme",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 209.0
+      }
+    },
+    {
+      "turn": 4,
+      "source": "ui",
+      "user_transcript": "[button] Confirm order",
+      "fsm_state": "CONFIRMED",
+      "tool_calls": [],
+      "agent_response": "Your order is on its way to the kitchen. Receipt CP-07F127.",
+      "db_state": {
+        "table_sessions.status": "CONFIRMED",
+        "order_line_items": [
+          {
+            "item": "Nachos Supreme",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 209.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "CONFIRMED",
+    "grand_total_php": 209.0,
+    "items_purchased": [
+      "Nachos Supreme"
+    ]
+  },
+  "receipt": {
+    "receipt_no": "CP-07F127",
+    "issued_at": "2026-10-14 14:49",
+    "table_no": 4,
+    "items": [
+      {
+        "line_id": 23,
+        "item_id": 17,
+        "name": "Nachos Supreme",
+        "image_url": null,
+        "category": "Snacks",
+        "allergens": "dairy",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 190.0,
+        "line_total": 190.0
+      }
+    ],
+    "subtotal": 190.0,
+    "service_fee": 19.0,
+    "grand_total": 209.0
+  }
+}

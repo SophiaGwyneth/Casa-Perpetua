@@ -1,0 +1,242 @@
+{
+  "session_id": "sess_6ef87a98",
+  "table_number": 19,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-14T20:58:29",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Dairy menu",
+      "at": "2026-10-14T20:58:38"
+    },
+    {
+      "from": "ORDERING",
+      "to": "REVIEW",
+      "trigger": "ui: Review order",
+      "at": "2026-10-14T20:58:43"
+    },
+    {
+      "from": "REVIEW",
+      "to": "CONFIRMED",
+      "trigger": "ui: Confirm order",
+      "at": "2026-10-14T20:58:44"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 19 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Dairy menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Dairy"
+          },
+          "result": {
+            "success": true,
+            "category": "Dairy",
+            "items": [
+              {
+                "name": "Cheese Platter",
+                "price": 280.0,
+                "stock_qty": 10
+              },
+              {
+                "name": "Fresh Milk",
+                "price": 70.0,
+                "stock_qty": 27
+              },
+              {
+                "name": "Strawberry Milk",
+                "price": 90.0,
+                "stock_qty": 28
+              },
+              {
+                "name": "Strawberry Yogurt Cup",
+                "price": 100.0,
+                "stock_qty": 19
+              },
+              {
+                "name": "Yogurt Parfait",
+                "price": 120.0,
+                "stock_qty": 18
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Dairy menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Show me the Desserts menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Desserts"
+          },
+          "result": {
+            "success": true,
+            "category": "Desserts",
+            "items": [
+              {
+                "name": "Chocolate Lava Cake",
+                "price": 190.0,
+                "stock_qty": 12
+              },
+              {
+                "name": "Halo-Halo",
+                "price": 140.0,
+                "stock_qty": 23
+              },
+              {
+                "name": "Leche Flan",
+                "price": 120.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Mango Sago",
+                "price": 120.0,
+                "stock_qty": 18
+              },
+              {
+                "name": "Tiramisu",
+                "price": 180.0,
+                "stock_qty": 14
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Desserts menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Strawberry Yogurt Cup",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 110.0
+      }
+    },
+    {
+      "turn": 4,
+      "source": "ui",
+      "user_transcript": "[button] Review order",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Please check your order and confirm when you are ready.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Strawberry Yogurt Cup",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Leche Flan",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 242.0
+      }
+    },
+    {
+      "turn": 5,
+      "source": "ui",
+      "user_transcript": "[button] Confirm order",
+      "fsm_state": "CONFIRMED",
+      "tool_calls": [],
+      "agent_response": "Your order is on its way to the kitchen. Receipt CP-F87A98.",
+      "db_state": {
+        "table_sessions.status": "CONFIRMED",
+        "order_line_items": [
+          {
+            "item": "Strawberry Yogurt Cup",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Leche Flan",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 242.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "CONFIRMED",
+    "grand_total_php": 242.0,
+    "items_purchased": [
+      "Strawberry Yogurt Cup",
+      "Leche Flan"
+    ]
+  },
+  "receipt": {
+    "receipt_no": "CP-F87A98",
+    "issued_at": "2026-10-14 20:58",
+    "table_no": 19,
+    "items": [
+      {
+        "line_id": 23,
+        "item_id": 81,
+        "name": "Strawberry Yogurt Cup",
+        "image_url": null,
+        "category": "Dairy",
+        "allergens": "milk",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 100.0,
+        "line_total": 100.0
+      },
+      {
+        "line_id": 24,
+        "item_id": 13,
+        "name": "Leche Flan",
+        "image_url": null,
+        "category": "Desserts",
+        "allergens": "egg,dairy",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 120.0,
+        "line_total": 120.0
+      }
+    ],
+    "subtotal": 220.0,
+    "service_fee": 22.0,
+    "grand_total": 242.0
+  }
+}

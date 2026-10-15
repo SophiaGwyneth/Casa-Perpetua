@@ -1,0 +1,338 @@
+{
+  "session_id": "sess_38dae613",
+  "table_number": 13,
+  "party_size": 2,
+  "model": "qwen2.5",
+  "started_at": "2026-10-14T19:53:21",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Show me the Burgers menu",
+      "at": "2026-10-14T19:53:24"
+    },
+    {
+      "from": "ORDERING",
+      "to": "REVIEW",
+      "trigger": "ui: Review order",
+      "at": "2026-10-14T19:53:33"
+    },
+    {
+      "from": "REVIEW",
+      "to": "CONFIRMED",
+      "trigger": "ui: Confirm order",
+      "at": "2026-10-14T19:53:35"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 2",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 13 is all set, for two. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Show me the Burgers menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Burgers"
+          },
+          "result": {
+            "success": true,
+            "category": "Burgers",
+            "items": [
+              {
+                "name": "Bacon BBQ Burger",
+                "price": 220.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Bacon Burger",
+                "price": 220.0,
+                "stock_qty": 23
+              },
+              {
+                "name": "Cheeseburger",
+                "price": 180.0,
+                "stock_qty": 29
+              },
+              {
+                "name": "Classic Cheeseburger",
+                "price": 180.0,
+                "stock_qty": 24
+              },
+              {
+                "name": "Mushroom Swiss Burger",
+                "price": 210.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Veggie Burger",
+                "price": 190.0,
+                "stock_qty": 18
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Burgers menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [],
+        "grand_total_php": 0.0
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Show me the Snacks menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Snacks"
+          },
+          "result": {
+            "success": true,
+            "category": "Snacks",
+            "items": [
+              {
+                "name": "Calamari Fritti",
+                "price": 210.0,
+                "stock_qty": 14
+              },
+              {
+                "name": "Cheese Sticks",
+                "price": 140.0,
+                "stock_qty": 16
+              },
+              {
+                "name": "Nachos Supreme",
+                "price": 190.0,
+                "stock_qty": 20
+              },
+              {
+                "name": "Onion Rings",
+                "price": 130.0,
+                "stock_qty": 26
+              },
+              {
+                "name": "Truffle Fries",
+                "price": 150.0,
+                "stock_qty": 30
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Snacks menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Classic Cheeseburger",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 198.0
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "Show me the Coffee menu",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "get_menu_by_category",
+          "args": {
+            "category": "Coffee"
+          },
+          "result": {
+            "success": true,
+            "category": "Coffee",
+            "items": [
+              {
+                "name": "Americano",
+                "price": 100.0,
+                "stock_qty": 40
+              },
+              {
+                "name": "Cafe Latte",
+                "price": 130.0,
+                "stock_qty": 39
+              },
+              {
+                "name": "Caffe Latte",
+                "price": 135.0,
+                "stock_qty": 40
+              },
+              {
+                "name": "Cappuccino",
+                "price": 130.0,
+                "stock_qty": 35
+              },
+              {
+                "name": "Iced Americano",
+                "price": 110.0,
+                "stock_qty": 40
+              },
+              {
+                "name": "Spanish Latte",
+                "price": 150.0,
+                "stock_qty": 35
+              }
+            ]
+          },
+          "fast_path": true
+        }
+      ],
+      "agent_response": "Here is our Coffee menu. Tap Add to order on anything you would like.",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Classic Cheeseburger",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Onion Rings",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 341.0
+      }
+    },
+    {
+      "turn": 5,
+      "source": "ui",
+      "user_transcript": "[button] Review order",
+      "fsm_state": "REVIEW",
+      "tool_calls": [],
+      "agent_response": "Please check your order and confirm when you are ready.",
+      "db_state": {
+        "table_sessions.status": "REVIEW",
+        "order_line_items": [
+          {
+            "item": "Classic Cheeseburger",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Onion Rings",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Cappuccino",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 484.0
+      }
+    },
+    {
+      "turn": 6,
+      "source": "ui",
+      "user_transcript": "[button] Confirm order",
+      "fsm_state": "CONFIRMED",
+      "tool_calls": [],
+      "agent_response": "Your order is on its way to the kitchen. Receipt CP-DAE613.",
+      "db_state": {
+        "table_sessions.status": "CONFIRMED",
+        "order_line_items": [
+          {
+            "item": "Classic Cheeseburger",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Onion Rings",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Cappuccino",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 484.0
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "CONFIRMED",
+    "grand_total_php": 484.0,
+    "items_purchased": [
+      "Classic Cheeseburger",
+      "Onion Rings",
+      "Cappuccino"
+    ]
+  },
+  "receipt": {
+    "receipt_no": "CP-DAE613",
+    "issued_at": "2026-10-14 19:53",
+    "table_no": 13,
+    "items": [
+      {
+        "line_id": 20,
+        "item_id": 86,
+        "name": "Classic Cheeseburger",
+        "image_url": null,
+        "category": "Burgers",
+        "allergens": "gluten, milk, egg, sesame",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 180.0,
+        "line_total": 180.0
+      },
+      {
+        "line_id": 21,
+        "item_id": 19,
+        "name": "Onion Rings",
+        "image_url": null,
+        "category": "Snacks",
+        "allergens": "gluten",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 130.0,
+        "line_total": 130.0
+      },
+      {
+        "line_id": 22,
+        "item_id": 12,
+        "name": "Cappuccino",
+        "image_url": null,
+        "category": "Coffee",
+        "allergens": "dairy",
+        "quantity": 1,
+        "special_instructions": "",
+        "price": 130.0,
+        "line_total": 130.0
+      }
+    ],
+    "subtotal": 440.0,
+    "service_fee": 44.0,
+    "grand_total": 484.0
+  }
+}
