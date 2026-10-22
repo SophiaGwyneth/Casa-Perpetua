@@ -501,7 +501,7 @@ class CasaPerpetuaAgent:
     _FILLER = {"please", "pls", "and", "a", "an", "the", "some", "of", "x", "also", "plus", "then", "with", "me", "i", "we",
                "ll", "d", "like", "have", "get", "want", "take", "would", "can", "could", "give", "add", "order", "to", "my",
                "for", "us", "just", "only", "thanks", "thank", "you", "more", "another", "one"}
-    RE_QTY_BEFORE = re.compile(r"(\d{1,2}|\b(?:a|an|one|two|three|four|five|six|seven|eight|nine|ten|couple of|dozen)\b)\s*(?:x\s*|of\s+)?$", re.I)
+    RE_QTY_BEFORE = re.compile(r"((?<!\d)\d{1,3}|\b(?:a|an|one|two|three|four|five|six|seven|eight|nine|ten|couple of|dozen)\b)\s*(?:x\s*|of\s+)?$", re.I)
     RE_NOTE = re.compile(r"\b(?:no|without|extra|less|hold the|easy on the)\s+[a-z]+(?:\s+[a-z]+)?", re.I)
 
     def _rescue_from_menu(self, session: SessionContext, user_text: str, model_text: str, records: list) -> Optional[str]:

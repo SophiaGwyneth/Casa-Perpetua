@@ -2,6 +2,8 @@
 virtual_waiter_prototype.py - Casa Perpetua table-top kiosk (Lab 6.1, Option 1: web dashboard)
 
 Run:   python virtual_waiter_prototype.py      ->  http://localhost:5000
+       python virtual_waiter_prototype.py --cli  ->  same agent, FSM and SQLite tools in a plain terminal chat
+                                                    (options: --table N  --party N)
 Needs: ollama serve  +  ollama pull qwen2.5     (the kiosk still works for browsing and the +/- cart without it)
 
 Layout (per the lab handout)
@@ -17,6 +19,7 @@ Kiosk flow
 """
 import os
 import random
+import sys
 import threading
 import webbrowser
 
@@ -1127,14 +1130,38 @@ function isEcho(heard){
 
 /* ---- text-to-speech ---- */
 let voicePick = null, speakId = 0, speakTimer;
-function pickVoice(){
-  const en = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang));
-  for (const p of [/natural.*(aria|jenny|sonia|libby)/i, /\b(aria|jenny)\b/i, /google us english/i, /samantha|serena|karen|moira/i, /zira|hazel|susan/i]){
-    const v = en.find(v => p.test(v.name)); if (v){ voicePick = v; return; }
-  }
-  voicePick = en.find(v => v.default) || en[0] || null;
+/* Aeris speaks with Microsoft Zira wherever it is installed (Windows: Edge / Chrome). Phones do not ship Zira, and a web page
+   can only use voices already on the device, so there we pick the closest match: a clear female US-English voice
+   (iPhone / iPad / Mac: Samantha; Android: Google US English / the "en-US" female voice). */
+function voiceScore(v){
+  const n = v.name || '', l = (v.lang || '').replace('_', '-');
+  if (!/^en/i.test(l)) return -1;
+  if (/zira/i.test(n)) return 100;                                        // Microsoft Zira - English (United States)
+  if (/samantha/i.test(n)) return 80;                                     // iOS / macOS
+  if (/google us english/i.test(n)) return 75;                            // Chrome desktop + some Android builds
+  if (/^en-US$/i.test(l) && /female|#female|-(sfg|tpf|iol|iom)-/i.test(n)) return 70;   // Android female en-US voices
+  if (/^en-US$/i.test(l) && /aria|jenny|ava|allison|susan|joanna|kendra/i.test(n)) return 65;
+  if (/^en-US$/i.test(l)) return 50;
+  if (/^en/i.test(l)) return 10;
+  return -1;
 }
-if ('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function pickVoice(){
+  if (!('speechSynthesis' in window)) return;
+  const best = speechSynthesis.getVoices().map(v => [voiceScore(v), v]).filter(x => x[0] >= 0)
+                              .sort((a, b) => b[0] - a[0] || (b[1].default ? 1 : 0) - (a[1].default ? 1 : 0))[0];
+  voicePick = best ? best[1] : null;
+}
+if ('speechSynthesis' in window){
+  pickVoice(); speechSynthesis.onvoiceschanged = pickVoice;
+  let tries = 0; const poll = setInterval(() => { if (voicePick || ++tries > 20) clearInterval(poll); else pickVoice(); }, 250);   // iOS / Android load voices late
+  /* iOS and Android only allow speech that was started by a tap. Replies arrive after a network wait (not inside a tap),
+     so "unlock" speech on the very first touch / click / key press. */
+  const unlockSpeech = () => {
+    try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
+    ['pointerdown', 'touchend', 'click', 'keydown'].forEach(ev => window.removeEventListener(ev, unlockSpeech, true));
+  };
+  ['pointerdown', 'touchend', 'click', 'keydown'].forEach(ev => window.addEventListener(ev, unlockSpeech, true));
+}
 /* Make text sound natural for text-to-speech: the engine only pauses at punctuation,
    so add commas / periods where the written text relies on layout instead. */
 function prepSpeech(text){
@@ -1173,6 +1200,8 @@ function speak(text, then){
   if (!clean || !('speechSynthesis' in window)){ setTimeout(after, 0); return; }
   stopListening();
   const id = ++speakId;
+  if (!voicePick) pickVoice();
+  const busy = speechSynthesis.speaking || speechSynthesis.pending;
   speechSynthesis.cancel();
   let parts; try { parts = clean.split(/(?<=[.!?])\s+/).filter(Boolean); } catch (e) { parts = [clean]; }
   S.speaking = true; setVoiceUI();                                        // set NOW, so nothing opens the mic while we talk
@@ -1188,13 +1217,19 @@ function speak(text, then){
     if (finished || id !== speakId) return;
     if (speechSynthesis.speaking && Date.now() - t0 < 40000) speakTimer = setTimeout(guard, 500); else finish();
   };
-  parts.forEach((p, i) => {
-    const u = new SpeechSynthesisUtterance(p.trim());
-    if (voicePick){ u.voice = voicePick; u.lang = voicePick.lang; } else u.lang = 'en-US';
-    u.onerror = finish;
-    if (i === parts.length - 1) u.onend = finish;
-    speechSynthesis.speak(u);
-  });
+  const say = () => {
+    if (id !== speakId) return;                                           // replaced while waiting
+    parts.forEach((p, i) => {
+      const u = new SpeechSynthesisUtterance(p.trim());
+      if (voicePick){ u.voice = voicePick; u.lang = voicePick.lang; } else u.lang = 'en-US';
+      u.rate = 1; u.pitch = 1;
+      u.onerror = finish;
+      if (i === parts.length - 1) u.onend = finish;
+      speechSynthesis.speak(u);
+    });
+    if (speechSynthesis.paused) speechSynthesis.resume();                 // Android Chrome can come back paused
+  };
+  if (busy) setTimeout(say, 120); else say();                             // Android drops a speak() sent right after cancel()
   speakTimer = setTimeout(guard, 3000 + clean.split(/\s+/).length * 550);
 }
 
@@ -1427,9 +1462,90 @@ def _check_ollama() -> None:
               "Browsing and the +/- cart still work without it.")
 
 
+def _print_cart(session) -> None:
+    order = db_tools.view_current_order(session.session_id)
+    print("  +-- ORDER TAB " + "-" * 40)
+    if not order["items"]:
+        print("  |  (empty)")
+    for i in order["items"]:
+        note = f"  [{i['special_instructions']}]" if i["special_instructions"] else ""
+        print(f"  |  {i['quantity']}x {i['display_name']:<28} {i['line_total']:>8.2f} PHP{note}")
+    print(f"  |  Subtotal {order['subtotal']:.2f} | Service fee (10%) {order['service_fee_10_pct']:.2f} | TOTAL {order['grand_total']:.2f} PHP")
+    print("  +" + "-" * 53)
+
+
+def _print_receipt(r: dict) -> None:
+    print("\n  ===== CASA PERPETUA RECEIPT " + r["receipt_no"] + " =====")
+    print(f"  Table {r['table_no']}   {r['issued_at']}   Payment: {r['payment_method'] or '-'}")
+    for i in r["items"]:
+        print(f"  {i['quantity']}x {i['display_name']:<28} {i['line_total']:>8.2f}")
+    print(f"  Subtotal {r['subtotal']:.2f}  Service fee {r['service_fee']:.2f}  GRAND TOTAL {r['grand_total']:.2f} PHP\n")
+
+
+def run_cli(table_no: int = 4, party_size: int = 2) -> None:
+    """Terminal version of the kiosk (Lab 6.1 'Python CLI'): same FSM, same SQLite tools, same Qwen agent."""
+    session = agent.start_session(table_no, party_size)
+    help_text = "Commands: /cart  /review  /pay <cash|gcash|maya|card>  /confirm  /cancel  /quit   (anything else goes to the waiter)"
+    print("\nWaiter:", session.greeting)
+    print(help_text)
+    while True:
+        try:
+            text = input(f"\n[{session.current_state}] You: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            break
+        if not text:
+            continue
+        cmd, _, arg = text.partition(" ")
+        cmd = cmd.lower()
+        if cmd in ("/quit", "/exit"):
+            break
+        if cmd == "/help":
+            print(help_text)
+        elif cmd == "/cart":
+            _print_cart(session)
+        elif cmd == "/review":
+            res = agent.request_review(session)
+            print("Waiter:", res.get("message") or "Please check your order and confirm when you are ready.")
+            _print_cart(session)
+        elif cmd == "/pay":
+            print("Waiter:", agent.set_payment(session, arg)["message"])
+        elif cmd == "/confirm":
+            res = agent.confirm_order(session)
+            print("Waiter:", res["message"])
+            if res.get("receipt"):
+                _print_receipt(res["receipt"])
+        elif cmd == "/cancel":
+            print("Waiter:", agent.cancel_order(session)["message"])
+        else:
+            out = agent.process_turn(session, text)
+            for c in out["tool_calls"]:
+                print(f"  (tool) {c['tool']}({c['args']}) -> {c['result'].get('message', 'ok')}")
+            print("Waiter:", out["assistant_reply"])
+            if out.get("error"):
+                print("  (note)", out["error"])
+            if session.current_state != "GREETING":
+                _print_cart(session)
+            if out.get("receipt"):
+                _print_receipt(out["receipt"])
+        if session.current_state in FINAL_STATES:
+            print(f"\nSession ended in state {session.current_state}. Log saved to logs/{session.session_id}.json")
+            break
+
+
+def _cli_arg(flag: str, default: int) -> int:
+    try:
+        return int(sys.argv[sys.argv.index(flag) + 1])
+    except (ValueError, IndexError):
+        return default
+
+
 if __name__ == "__main__":
     db_tools.init_database()
     _check_ollama()
+    if "--cli" in sys.argv:
+        run_cli(_cli_arg("--table", 4), _cli_arg("--party", 2))
+        sys.exit(0)
     agent.warm_up()          # pre-load the model so the first answer is fast
     threading.Timer(1.0, lambda: webbrowser.open("http://localhost:5000")).start()
     app.run(host="127.0.0.1", port=5000, debug=False)

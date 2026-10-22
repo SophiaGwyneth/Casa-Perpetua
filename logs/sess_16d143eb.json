@@ -1,0 +1,220 @@
+{
+  "session_id": "sess_16d143eb",
+  "table_number": 8,
+  "party_size": 6,
+  "model": "qwen2.5",
+  "started_at": "2026-10-18T17:28:32",
+  "fsm_state_transitions": [
+    {
+      "from": "GREETING",
+      "to": "ORDERING",
+      "trigger": "chat: Can I order kimchi fried rice?",
+      "at": "2026-10-18T17:28:55"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "source": "ui",
+      "user_transcript": "[kiosk] Table for 6",
+      "fsm_state": "GREETING",
+      "tool_calls": [],
+      "agent_response": "Welcome to Casa Perpetua! Table 8 is all set, for six. May I take your order?",
+      "db_state": {
+        "table_sessions.status": "GREETING",
+        "order_line_items": [],
+        "grand_total_php": 0.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 2,
+      "source": "chat",
+      "user_transcript": "Can I order kimchi fried rice?",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Kimchi Fried Rice",
+            "qty": 1
+          },
+          "result": {
+            "success": true,
+            "message": "Added 1x Kimchi Fried Rice to the cart.",
+            "item": {
+              "id": 68,
+              "name": "Kimchi Fried Rice",
+              "category": "Korean",
+              "price": 220.0,
+              "stock_qty": 19,
+              "allergens": "egg,soy,sesame,fish",
+              "image_url": "/menu-img/Kimchi%20Fried%20Rice.png",
+              "subcategory": "",
+              "temp_options": ""
+            }
+          }
+        }
+      ],
+      "agent_response": "Added 1 Kimchi Fried Rice to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 242.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 3,
+      "source": "chat",
+      "user_transcript": "Cappuccino.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Cappuccino",
+            "size": "Tall"
+          },
+          "result": {
+            "success": false,
+            "needs_choice": "temperature",
+            "message": "Would you like the Cappuccino hot or iced?"
+          }
+        }
+      ],
+      "agent_response": "Would you like the Cappuccino hot or iced?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 242.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 4,
+      "source": "chat",
+      "user_transcript": "Porto hot Porto.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [],
+      "agent_response": "I'm sorry, I didn't catch that. Would you like your Cappuccino hot or iced?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 242.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 5,
+      "source": "chat",
+      "user_transcript": "I like a hot cappuccino for two.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "item_name": "Cappuccino",
+            "instructions": "hot",
+            "qty": 2
+          },
+          "result": {
+            "success": false,
+            "needs_choice": "size",
+            "message": "What size would you like for your hot Cappuccino: Short or Tall?"
+          }
+        }
+      ],
+      "agent_response": "What size would you like for your hot Cappuccino: Short or Tall?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          }
+        ],
+        "grand_total_php": 242.0,
+        "payment_method": null
+      }
+    },
+    {
+      "turn": 6,
+      "source": "chat",
+      "user_transcript": "Short.",
+      "fsm_state": "ORDERING",
+      "tool_calls": [
+        {
+          "tool": "add_item_to_order",
+          "args": {
+            "size": "Short",
+            "item_name": "Cappuccino",
+            "instructions": "hot"
+          },
+          "result": {
+            "success": true,
+            "message": "Added 1x Cappuccino (Short) to the cart.",
+            "item": {
+              "id": 12,
+              "name": "Cappuccino",
+              "category": "Beverages",
+              "price": 130.0,
+              "stock_qty": 35,
+              "allergens": "dairy",
+              "image_url": "/menu-img/Iced%20Cappuccino.png",
+              "subcategory": "Coffee",
+              "temp_options": "hot,iced"
+            }
+          }
+        }
+      ],
+      "agent_response": "Added 1 Cappuccino (Short) to your order. Anything else?",
+      "db_state": {
+        "table_sessions.status": "ORDERING",
+        "order_line_items": [
+          {
+            "item": "Kimchi Fried Rice",
+            "qty": 1,
+            "notes": ""
+          },
+          {
+            "item": "Cappuccino (Short)",
+            "qty": 1,
+            "notes": "hot"
+          }
+        ],
+        "grand_total_php": 368.5,
+        "payment_method": null
+      }
+    }
+  ],
+  "final_cart_state": {
+    "status": "ORDERING",
+    "grand_total_php": 368.5,
+    "payment_method": null,
+    "items_purchased": [
+      "Kimchi Fried Rice",
+      "Cappuccino"
+    ]
+  },
+  "receipt": null
+}
